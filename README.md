@@ -8,18 +8,21 @@ demo地址 : [http://living-mongo.kupposhadow.com](http://living-mongo.kupposhad
 github : [https://github.com/swimmingwhale/living-mongo](https://github.com/swimmingwhale/living-mongo "https://github.com/swimmingwhale/living-mongo")
 
 # 运行环境
-PHP >= 7.0
-
-MongoDB >= 3.4.2
+- PHP >= 7.0
+- MongoDB >= 3.4.2
 
 # 数据管理
 <img src="screenshots/1.png">
+
 # 图片预览
 <img src="screenshots/2.png">
+
 # 数据搜索
 <img src="screenshots/3.png">
+
 # 空间统计
 <img src="screenshots/4.png">
+
 # 慢查询统计
 <img src="screenshots/5.png">
 
