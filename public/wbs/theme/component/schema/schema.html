@@ -1,0 +1,147 @@
+<div class="modal fade smallbox" id="create_schema" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新建属性</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">英文名:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_schema.name" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">中文名:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_schema.zh_name" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">类型:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <select class="form-control" ng-options="x as y for (x, y) in schema_type"
+                                            ng-model="create_schema.schema_type">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">备注:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_schema.remark" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">权重:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="number" class="form-control" ng-model="create_schema.sort" placeholder="0">
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">列表显示:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <select class="form-control" ng-model="create_schema.visible" ng-options="o.v as o.n for o in [{ n: '是', v: true }, { n: '否', v: false }]">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary" ng-click="createSchema()">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade smallbox" id="edit_schema" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑属性</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">英文名:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_schema.name" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">中文名:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_schema.zh_name" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">类型:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <select class="form-control" ng-options="x as y for (x, y) in schema_type"
+                                            ng-model="create_schema.schema_type">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">备注:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_schema.remark" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">权重:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="number" class="form-control" ng-model="create_schema.sort">
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">列表显示:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <select class="form-control" ng-model="create_schema.visible" ng-options="o.v as o.n for o in [{ n: '是', v: true }, { n: '否', v: false }]">
+                                    </select>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary" ng-click="saveSchema()">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

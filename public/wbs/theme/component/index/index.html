@@ -1,0 +1,27 @@
+<div class="modal fade smallbox" id="create_index" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新建索引</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">索引:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_index.keys" required>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary" ng-click="createindex()">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

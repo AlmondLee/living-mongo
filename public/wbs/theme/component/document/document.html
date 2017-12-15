@@ -1,0 +1,322 @@
+<content class="board pull-left">
+    <button type="button" class="btn btn-success" ng-click="showCreateDocument()">新增</button>
+    <button type="button" class="btn btn-success" ng-click="showEditDocument()">编辑</button>
+    <button type="button" class="btn btn-success" ng-click="saveAll()">保存</button>
+    <button type="button" class="btn btn-danger delete" ng-click="removeRow()">删除</button>
+    <span class="">{{search_str}}</span>
+    <div class="pull-right">
+        <button type="button" class="btn btn-info" ng-click="seach()">搜索</button>
+        <button type="button" class="btn btn-primary" ng-click="export()">导出</button>
+    </div>
+    <br>
+    <br>
+    <div id="grid1" ui-grid="gridOpts" ui-grid-resize-columns ui-grid-selection ui-grid-edit class="grid"></div>
+    <div class="clearfix">
+        <p class="pull-left">Current page: {{params.page}} of {{params.total_page}}</p>
+        <p class="pull-right">total: {{params.total}}</p>
+    </div>
+    <button type="button" class="btn btn-success" ng-click="firstPage()">首页</button>
+    <button type="button" class="btn btn-success" ng-click="prePage()">上一页</button>
+    <button type="button" class="btn btn-success" ng-click="nextPage()">下一页</button>
+    <button type="button" class="btn btn-success" ng-click="endPage()">尾页</button>
+    <button type="button" class="btn btn-success" ng-click="currentPage()">刷新</button>
+</content>
+
+
+<div class="modal fade smallbox" id="create_document" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新建文档</h4>
+            </div>
+            <div class="modal-body">
+                <form name="myForm" ng-submit="createDocument()">
+                    <ul class="verticalList">
+                        <li ng-repeat="(key, value) in collection_schema">
+                            <div class="form-group" ng-if="value.schema_type == 'single-line-text'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'multi-line-text'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control"
+                                              ng-model="$parent.new_document_data[value.name]"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'digital'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="number" class="form-control"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'float-digital'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'non-input'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <select class="form-control" ng-model="$parent.new_document_data[value.name]"
+                                            ng-options="o.v as o.n for o in [{ n: '是', v: true }, { n: '否', v: false }]">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'array'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-list
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'embedded-document'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control"
+                                              ng-model="$parent.new_document_data[value.name]"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'file'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+
+                                <div class="col-md-8 clearPadding">
+                                    <div ngf-drop ngf-select="upload(files,value.name)" ngf-change ng-model="files"
+                                         class="drop-box"
+                                         ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-allow-dir="true"
+                                         accept="image/jpg,image/JPG,image/gif,image/GIF,image/png,image/PNG,image/jpeg,image/JPEG"
+                                         ngf-pattern="'image/jpg,image/JPG,image/gif,image/GIF,image/png,image/PNG,image/jpeg,image/JPEG'">
+                                        <img width="64px" height="30px" ng-if="$parent.new_document_data[value.name]"
+                                             ng-src="{{$parent.new_document_data[value.name]}}?w=64&h=64" src-input>
+                                    </div>
+                                    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                                    <pre ng-if="log">{{log}}</pre>
+                                    <input type="text" class="form-control" ng-hide="true"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'rich-text'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control"
+                                              ng-model="$parent.new_document_data[value.name]"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'date'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="datetime-local" class="form-control" format-date
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade smallbox" id="edit_document" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑文档</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="verticalList">
+                        <li ng-repeat="(key, value) in collection_schema">
+                            <div class="form-group" ng-if="value.schema_type == 'single-line-text'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'multi-line-text'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control"
+                                              ng-model="$parent.new_document_data[value.name]"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'digital'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="number" class="form-control"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'float-digital'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'non-input'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <select class="form-control" ng-model="$parent.new_document_data[value.name]"
+                                            ng-options="o.v as o.n for o in [{ n: '是', v: true }, { n: '否', v: false }]">
+                                        <option value="">--请选择--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'array'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-list
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'embedded-document'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control"
+                                              ng-model="$parent.new_document_data[value.name]"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'file'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+
+                                <div class="col-md-8 clearPadding">
+                                    <div ngf-drop ngf-select="upload(files,value.name)" ngf-change ng-model="files"
+                                         class="drop-box"
+                                         ngf-drag-over-class="'dragover'" ngf-multiple="false" ngf-allow-dir="true"
+                                         accept="image/jpg,image/JPG,image/gif,image/GIF,image/png,image/PNG,image/jpeg,image/JPEG"
+                                         ngf-pattern="'image/jpg,image/JPG,image/gif,image/GIF,image/png,image/PNG,image/jpeg,image/JPEG'">
+                                        <img width="64px" height="30px" ng-if="$parent.new_document_data[value.name]"
+                                             ng-src="{{$parent.new_document_data[value.name]}}?w=64&h=64" src-input>
+                                    </div>
+                                    <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+                                    <pre ng-if="log">{{log}}</pre>
+                                    <input type="text" class="form-control" ng-hide="true"
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'rich-text'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control"
+                                              ng-model="$parent.new_document_data[value.name]"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="value.schema_type == 'date'">
+                                <label class="col-md-4 clearPadding">{{value.displayName}}</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="datetime-local" class="form-control" format-date
+                                           ng-model="$parent.new_document_data[value.name]">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary" ng-click="editDocument()">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade smallbox" id="seach" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请输入搜索条件</h4>
+            </div>
+            <div class="modal-body searchtable">
+                <form ng-submit="seachDocument()">
+                    <div class="btngroup">
+                        <button class="btn btn-primary">搜索</button>
+                        <button class="btn btn-primary" ng-click="clear_query()">清空</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                    <ul>
+                        <li class="col-md-12 fieldgroup">
+                            <div>
+                                <div class="fieldtitle">系统id</div>
+                                <ul class="clearfix">
+                                    <li><div>模糊</div><input type="checkbox" ng-model="search_query['_id'].fuzzy"></li>
+                                    <li><div>单行文本</div><input type="text" ng-model="search_query['_id'].text"></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="col-md-12 fieldgroup"  ng-repeat="(key, value) in collection_schema">
+                            <div ng-if="search_schema_input.indexOf(value.schema_type) >=0">
+                                <div class="fieldtitle">{{value.zh_name}}</div>
+                                <ul class="clearfix">
+                                    <li><div>模糊</div><input type="checkbox" ng-model="$parent.search_query[value.name].fuzzy"></li>
+                                    <li><div>单行文本</div><input type="text" ng-model="$parent.search_query[value.name].text"></li>
+                                </ul>
+                            </div>
+                            <div ng-if="search_schema_number.indexOf(value.schema_type) >=0">
+                                <div class="fieldtitle">{{value.zh_name}}</div>
+                                <ul class="clearfix">
+                                    <li><div>最小值(>=)</div><input type="text" ng-model="$parent.search_query[value.name].min"></li>
+                                    <li><div>最大值(<=)</div><input type="text" ng-model="$parent.search_query[value.name].max"></li>
+                                </ul>
+                            </div>
+                            <div ng-if="value.schema_type == 'non-input'">
+                                <div style="margin: 10px 10px 10px 0px;float: left;">{{value.zh_name}}</div>
+                                <div style="margin: 10px;float: left;">
+                                    <select ng-model="$parent.search_query[value.name]">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div ng-if="value.schema_type == 'date'">
+                                <div class="fieldtitle">{{value.zh_name}}</div>
+                                <ul class="clearfix">
+                                    <li><div>开始时间</div><input type="datetime-local" ng-model="$parent.search_query[value.name].start"></li>
+                                    <li><div>截止时间</div><input type="datetime-local" ng-model="$parent.search_query[value.name].end"></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="col-md-12 fieldgroup">
+                            <div>
+                                <div class="fieldtitle">创建时间</div>
+                                <ul class="clearfix">
+                                    <li><div>开始时间</div><input type="datetime-local" ng-model="search_query['__CREATE_TIME__'].start"></li>
+                                    <li><div>截止时间</div><input type="datetime-local" ng-model="search_query['__CREATE_TIME__'].end"></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="col-md-12 fieldgroup">
+                            <div>
+                                <div class="fieldtitle">修改时间</div>
+                                <ul class="clearfix">
+                                    <li><div>开始时间</div><input type="datetime-local" ng-model="search_query['__MODIFY_TIME__'].start"></li>
+                                    <li><div>截止时间</div><input type="datetime-local" ng-model="search_query['__MODIFY_TIME__'].end"></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div class="btngroup">
+                        <button class="btn btn-primary">搜索</button>
+                        <button class="btn btn-primary" ng-click="clear_query()">清空</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

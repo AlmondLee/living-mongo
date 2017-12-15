@@ -1,0 +1,208 @@
+<content class="bar pull-left">
+    <button type="button" class="btn btn-success" ng-click="showCreateCollection()">新增</button>
+    <button type="button" class="btn btn-success" ng-click="showSchemaManagerCollection()">属性</button>
+    <button type="button" class="btn btn-success" ng-click="showIndexManagerCollection()">索引</button>
+    <br>
+    <br>
+    <div id="gridcollection" ui-grid="gridOptions" ui-grid-selection ui-grid-edit class="grid"></div>
+    <div class="clearfix">
+        <p class="pull-left">Current page: {{params.page}} of {{params.total_page}}</p>
+        <p class="pull-right">total: {{params.total}}</p>
+    </div>
+    <button type="button" class="btn btn-success" ng-click="prePage()">上一页</button>
+    <button type="button" class="btn btn-success" ng-click="nextPage()">下一页</button>
+    <button type="button" class="btn btn-success" ng-click="currentPage()">刷新</button>
+</content>
+
+
+
+<div class="modal fade smallbox" id="create_collection" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">新建集合</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">集合中文名:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_collection.name" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">备注:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control" ng-model="create_collection.remark"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary" ng-click="createCollection()">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade smallbox" id="edit_collection" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">编辑集合</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">集合中文名:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="create_collection.name" required>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">备注:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <textarea class="form-control" ng-model="create_collection.remark"></textarea>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary" ng-click="editCollection()">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade smallbox" id="delete_collection" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认您要删除的集合</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="deleteCollection()" name="deleteCollection">
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">确认要删除集合:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="delete_collection.collection_name" required>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade smallbox" id="demo2pro_collection" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认要用demo环境的数据覆盖正式环境？</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="demo2proCollection()" name="demo2pro_collection">
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">确认集合:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="demo2pro_collection.collection_name" required>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade smallbox" id="pro2demo_collection" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认要用正式环境的数据覆盖demo环境？</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="pro2demoCollection()" name="pro2demo_collection">
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">确认集合:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="pro2demo_collection.collection_name" required>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade smallbox" id="clear_collection" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">请确认清空集合</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="clearCollection()" name="clear_collection">
+                    <ul class="verticalList">
+                        <li>
+                            <div class="form-group">
+                                <label class="col-md-4 clearPadding">确认要清空的集合:</label>
+                                <div class="col-md-8 clearPadding">
+                                    <input type="text" class="form-control" ng-model="clear_collection.collection_name" required>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="btngroup">
+                        <button class="btn btn-primary">确认</button>
+                        <button class="btn btn-danger" data-dismiss="modal">取消</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

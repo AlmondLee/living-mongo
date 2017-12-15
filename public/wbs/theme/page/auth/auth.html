@@ -1,0 +1,72 @@
+<div>
+    <div class="container clearfix">
+        <div class="solvebutton">
+            <a href="#index" class="btn btn-success" >返回首页</a>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>user_id</th>
+                <th>用户昵称</th>
+                <th>登录账号</th>
+                <th>管理员</th>
+                <th>操作</th>
+            </tr>
+            <tr ng-repeat="val in list">
+                <td>{{val._id}}</td>
+                <td>{{val.nickname}}</td>
+                <td>{{val.username}}</td>
+                <td>{{val.administrator}}</td>
+                <td><a ng-click="editAuth(val._id)" class="btn">分配权限</a></td>
+            </tr>
+        </table>
+        <!--<p>Current page: {{params.page}} of {{params.total_page}}&nbsp;&nbsp;&nbsp;&nbsp;total: {{params.total}}</p>-->
+        <!--<button type="button" class="btn btn-success" ng-click="firstPage()">首页</button>-->
+        <!--<button type="button" class="btn btn-success" ng-click="prePage()">上一页</button>-->
+        <!--<button type="button" class="btn btn-success" ng-click="nextPage()">下一页</button>-->
+        <!--<button type="button" class="btn btn-success" ng-click="endPage()">尾页</button>-->
+        <!--<button type="button" class="btn btn-success" ng-click="currentPage()">刷新</button>-->
+    </div>
+</div>
+
+
+<div class="modal fade bs-example-modal-lg" id="edit_auth" tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">项目管理</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group clearfix" ng-if="kupposhadowUserinfo.user_id != user_id">
+                    <label class="col-md-2 clearPadding">角色:</label>
+                    <div class="col-md-10 clearPadding">
+                        <label><input type="radio" name="administrator" ng-model="data.administrator" value="no" required>普通用户</label>
+                        <label><input type="radio" name="administrator" ng-model="data.administrator" value="yes">管理员</label>
+                    </div>
+                </div>
+                <div class="is-scrolled">
+                    <table class="table table-striped text-center table-hover list-table scrollTable">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>项目名称</td>
+                                <td>创建时间</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="val in data.projectList">
+                                <td><input type="checkbox" name="administrator" ng-model="val.owner" ></td>
+                                <td>{{val.name}}</td>
+                                <td>{{val.__CREATE_TIME__}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="saveAuth()">确认</button>
+                <button class="btn btn-danger" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

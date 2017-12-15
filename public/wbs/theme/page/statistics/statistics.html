@@ -1,0 +1,49 @@
+<div>
+    <div class="container clearfix">
+        <div class="solvebutton">
+            <a href="#index" class="btn btn-success" >返回首页</a>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>名称</th>
+                <th>总大小</th>
+                <th>数据库总数</th>
+            </tr>
+            <tr>
+                <td>LivingMongo</td>
+                <td>{{data.totalSize}}</td>
+                <td>{{data.databases.length}}</td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <th>数据库名</th>
+                <th>大小</th>
+                <th>集合数</th>
+            </tr>
+            <tr ng-repeat="val in data.databases">
+                <td>{{val.name}}</td>
+                <td>{{val.sizeOnDisk}}</td>
+                <td>{{val.listCollections.length}}</td>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+            <tr>
+                <th>集合名</th>
+                <th>大小</th>
+                <th>文档数</th>
+                <th>数据平均大小</th>
+                <th>所占磁盘大小(预分配空间)</th>
+                <th>索引大小</th>
+            </tr>
+            <tr ng-repeat="val in data.collectionInfo">
+                <td>{{val[0].ns}}</td>
+                <td>{{val[0].size}}</td>
+                <td>{{val[0].count}}</td>
+                <td>{{val[0].avgObjSize}}</td>
+                <td>{{val[0].storageSize}}</td>
+                <td>{{val[0].totalIndexSize}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+<div>
+    <div class="container clearfix">
+        <div class="solvebutton">
+            <a href="#index" class="btn btn-success" >返回首页</a>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>时间</th>
+                <th>集合</th>
+                <th>耗时</th>
+                <th>详情</th>
+            </tr>
+            <tr ng-repeat="val in data">
+                <td>{{val.ts}}</td>
+                <td>{{val.ns}}</td>
+                <td>{{val.millis}}</td>
+                <td><input type="text" value="{{val}}"></td>
+            </tr>
+        </table>
+        <div class="clearfix">
+            <p class="pull-left">Current page: {{params.page}} of {{params.total_page}}</p>
+            <p class="pull-right">total: {{params.total}}</p>
+        </div>
+        <button type="button" class="btn btn-success" ng-click="firstPage()">首页</button>
+        <button type="button" class="btn btn-success" ng-click="prePage()">上一页</button>
+        <button type="button" class="btn btn-success" ng-click="nextPage()">下一页</button>
+        <button type="button" class="btn btn-success" ng-click="endPage()">尾页</button>
+        <button type="button" class="btn btn-success" ng-click="currentPage()">刷新</button>
+    </div>
+</div>

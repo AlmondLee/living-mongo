@@ -1,0 +1,44 @@
+{
+  "gulpConfig": {
+    "lib": [
+      "public/wbs/vendor/jquery/dist/jquery.min.js",
+      "public/wbs/vendor/angular/angular.min.js",
+      "public/wbs/vendor/angular-cookies/angular-cookies.min.js",
+      "public/wbs/vendor/angular-route/angular-route.min.js",
+      "public/wbs/vendor/angular-touch/angular-touch.min.js",
+      "public/wbs/vendor/angular-animate/angular-animate.min.js",
+      "public/wbs/vendor/bootstrap/dist/js/bootstrap.min.js",
+      "public/wbs/vendor/angular-ui-grid/ui-grid.min.js",
+      "public/wbs/vendor/nprogress/nprogress.js",
+      "public/wbs/vendor/ng-file-upload/dist/ng-file-upload.min.js"
+    ],
+    "app": [
+      "public/wbs/app/main.js",
+      "public/wbs/app/**/*.js"
+    ],
+    "theme": [
+      "default"
+    ]
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-angular-templatecache": "^2.0.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-connect-multi": "^1.0.8",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-filter": "^4.0.0",
+    "gulp-less": "^3.1.0",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-replace": "^0.5.4",
+    "gulp-rev": "^7.1.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.4",
+    "gulp-watch": "^4.3.9",
+    "gulp-wrap": "^0.13.0",
+    "win-spawn": "^2.0.0"
+  }
+}
