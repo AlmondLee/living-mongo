@@ -32,13 +32,13 @@ github : [https://github.com/swimmingwhale/living-mongo](https://github.com/swim
 docker pull swimmingwhale/living-mongo
 docker run -dt --name living-mongo -p 80:80 swimmingwhale/living-mongo
 ```
-容器内包含了nginx,php,mongodb等所有运行所需的软件.启动容器后就可以通过访问服务器ip的方式访问该项目.如果你是在window上运行的docker可以直接在浏览器访问http://127.0.0.1
+容器内包含了nginx,php,mongodb等所有运行所需的软件.等待容器启动后,访问http://localhost, or http://host-ip
 
 
 如果你的80端口被占用,可以使用其他端口,如
 ```shell
 docker run -dt --name living-mongo -p 8110:80 swimmingwhale/living-mongo
 ```
-这样你需要访问ip:8110
+这样你需要访问http://localhost:8110, or http://host-ip:8110
 
 
