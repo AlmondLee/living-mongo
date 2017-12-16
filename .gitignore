@@ -5,4 +5,3 @@ Homestead.json
 Homestead.yaml
 /public/html/*/node_modules
 /public/html/*/.idea
-/vendor
