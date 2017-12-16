@@ -41,4 +41,17 @@ docker run -dt --name living-mongo -p 8110:80 swimmingwhale/living-mongo
 ```
 这样你需要访问http://localhost:8110, or http://host-ip:8110
 
+## linux和windows系统安装
+linux和windows环境的安装需要先搭建好web环境,然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.
 
+## 配置
+默认系统无用户名和密码,MongoDB默认连接127.0.0.1,如须修改可以更改.env文件下的相关配置
+```
+MONGODB_HOST=mongodb://127.0.0.1:27017
+
+USERNAME=
+PASSWORD=
+```
+MONGODB_HOST为数据库连接地址
+
+USERNAME和PASSWORD为登录的用户名和密码
