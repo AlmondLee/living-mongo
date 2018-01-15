@@ -7,10 +7,6 @@ demo地址 : [http://living-mongo.kupposhadow.com](http://living-mongo.kupposhad
 
 github : [https://github.com/swimmingwhale/living-mongo](https://github.com/swimmingwhale/living-mongo "https://github.com/swimmingwhale/living-mongo")
 
-# 运行环境
-- PHP >= 7.0
-- MongoDB >= 3.4.2
-
 # 数据管理
 <img src="screenshots/1.png">
 
@@ -27,22 +23,20 @@ github : [https://github.com/swimmingwhale/living-mongo](https://github.com/swim
 <img src="screenshots/5.png">
 
 
-## 使用docker安装测试
-```shell
-docker pull swimmingwhale/living-mongo
-docker run -dt --name living-mongo -p 80:80 swimmingwhale/living-mongo
+## Quickstart
 ```
-容器内包含了nginx,php,mongodb等所有运行所需的软件.等待容器启动后,访问http://localhost, or http://host-ip
-
-
-如果你的80端口被占用,可以使用其他端口,如
-```shell
-docker run -dt --name living-mongo -p 8110:80 swimmingwhale/living-mongo
+docker run -dt --rm -p 8110:80 swimmingwhale/living-mongo:v1.0
 ```
-这样你需要访问http://localhost:8110, or http://host-ip:8110
+容器内包含了nginx,php,mongodb等所有运行所需的软件.
+等待容器启动后,访问http://localhost:8110, or http://host-ip:8110
+
 
 ## linux和windows系统下安装
-linux和windows环境下的安装需要先搭建好web环境,然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.
+linux和windows环境下的安装需要先搭建好web环境,然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.环境需求如下
+```php
+PHP >= 7.0
+MongoDB >= 3.4.2
+```
 
 ## 配置
 默认系统无用户名和密码,MongoDB默认连接127.0.0.1,如须修改可以更改.env文件下的相关配置
