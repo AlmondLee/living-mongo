@@ -28,9 +28,15 @@ docker run -dt --rm -p 8110:80 swimmingwhale/living-mongo:v1.0
 
 构建镜像的Dockerfile在[这里](https://github.com/swimmingwhale/living-mongo-Dockerfile)
 
+## window环境
+1. [下载](https://www.apachefriends.org/zh_cn/index.html)安装xampp
+2. [下载](https://www.mongodb.com/download-center#community)安装mongodb
+3. [下载](https://pecl.php.net/package/mongodb)php的mongodb扩展php_mongodb.dll放到xampp/php/ext目录.修改xampp/php/php.ini，添加extension=php_mongodb.dll
+4. 下载项目到xampp的htdocs目录
+5. 启动apache和mongodb,访问http://localhost
 
-## linux和windows系统下安装
-linux和windows环境先安装nginx+php+mongodb,然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.环境需求如下
+## linux环境
+安装nginx+php+mongodb,及php的mongodb扩展.然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.环境需求如下
 ```php
 PHP >= 7.0
 MongoDB >= 3.4.2
