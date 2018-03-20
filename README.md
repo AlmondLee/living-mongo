@@ -3,10 +3,6 @@ LivingMongo是一个mongodb数据库的GUI操作系统，支持对数据`字段�
 
 demo地址 : [http://living-mongo.kupposhadow.com](http://living-mongo.kupposhadow.com "http://living-mongo.kupposhadow.com")
 
-使用介绍 : [开源MongoDB GUI - LivingMongo](https://www.kupposhadow.com/post/5a31418fe717c521e26e7649 "开源MongoDB GUI - LivingMongo")
-
-github : [https://github.com/swimmingwhale/living-mongo](https://github.com/swimmingwhale/living-mongo "https://github.com/swimmingwhale/living-mongo")
-
 # 数据管理
 <img src="screenshots/1.png">
 
@@ -30,9 +26,11 @@ docker run -dt --rm -p 8110:80 swimmingwhale/living-mongo:v1.0
 容器内包含了nginx,php,mongodb等所有运行所需的软件.
 等待容器启动后,访问http://localhost:8110, or http://host-ip:8110
 
+构建镜像的Dockerfile在[这里](https://github.com/swimmingwhale/living-mongo-Dockerfile)
+
 
 ## linux和windows系统下安装
-linux和windows环境下的安装需要先搭建好web环境,然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.环境需求如下
+linux和windows环境先安装nginx+php+mongodb,然后将项目clone到web根目录即可.读者可自行搜索web环境的搭建方法.环境需求如下
 ```php
 PHP >= 7.0
 MongoDB >= 3.4.2
